@@ -97,19 +97,13 @@ const AWSXRay = require('aws-xray-sdk-core')
 const AWS = AWSXRay.captureAWS(require('aws-sdk'))
 ```
 
-3. Repeat step 2 for
-
-* `functions/place-order.js`
-
-* `functions/search-restaurants.js`
-
-* `functions/notify-restaurant.js`
+3. Repeat step 2 for `functions/search-restaurants.js`
 
 4. Deploy the project
 
 `npm run sls -- deploy -s dev -r us-east-1`
 
-5. Load up the landing page, and place an order. Then head to the X-Ray console and see what you get now.
+5. Load up the landing page, then head to the X-Ray console and see what you get now.
 
 ![](/images/mod21-004.png)
 
@@ -248,13 +242,7 @@ const AWS = process.env.LAMBDA_RUNTIME_DIR
   : require('aws-sdk')
 ```
 
-4. Repeat step 3 with
-
-* `functions/place-order.js`
-
-* `functions/search-restaurants.js`
-
-* `functions/notify-restaurant.js`
+4. Repeat step 3 with `functions/search-restaurants.js`
 
 5. Rerun the integration tests
 

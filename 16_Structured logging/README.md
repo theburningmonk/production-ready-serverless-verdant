@@ -70,6 +70,7 @@ const getRestaurants = async () => {
 module.exports.handler = async (event, context) => {
   const template = loadHtml()
   const restaurants = await getRestaurants()
+  Log.debug('received restaurants', { count: restaurants.length })
   const dayOfWeek = days[new Date().getDay()]
   const view = {
     awsRegion,
@@ -93,50 +94,6 @@ module.exports.handler = async (event, context) => {
 }
 ```
 
-3. Modify `functions/place-order.js` and replace `console.log` with use of the logger.
-
-First, require the logger at the top of the file.
-
-```javascript
-const Log = require('@dazn/lambda-powertools-logger')
-```
-
-Replace the 2 instances of `console.log` with `Log.debug`.
-
-On ln11:
-
-```javascript
-Log.debug(`placing order ID [${orderId}] to [${restaurantName}]`)
-```
-
-On ln27:
-
-```javascript
-Log.debug(`published 'order_placed' event into Kinesis`)
-```
-
-4. Modify `functions/notify-restaurant.js` and replace `console.log` with use of the logger.
-
-First, require the logger at the top of the file.
-
-```javascript
-const Log = require('@dazn/lambda-powertools-logger')
-```
-
-Replace the 2 instances of `console.log` with `Log.debug`.
-
-On ln21:
-
-```javascript
-Log.debug(`notified restaurant [${order.restaurantName}] of order [${order.orderId}]`)
-```
-
-On ln32:
-
-```javascript
-Log.debug(`published 'restaurant_notified' event to Kinesis`)
-```
-
 5. Run the integration tests
 
 `STAGE=dev REGION=us-east-1 npm run test`
@@ -155,26 +112,12 @@ invoking via handler function get-index
 invoking via handler function get-restaurants
     ✓ Should return an array of 8 restaurants (226ms)
 
-  When we invoke the notify-restaurant function
-invoking via handler function notify-restaurant
-{"level":"DEBUG","message":"notified restaurant [Fangtasia] of order [e0018c8c-e7fe-5930-a298-793dbf3df179]"}
-{"level":"DEBUG","message":"published 'restaurant_notified' event to Kinesis"}
-    ✓ Should publish message to SNS
-    ✓ Should publish event to Kinesis
-
-  When we invoke the POST /orders endpoint
-invoking via handler function place-order
-{"level":"DEBUG","message":"placing order ID [e229e607-e2bf-5a54-b065-ca27be2b7bbb] to [Fangtasia]"}
-{"level":"DEBUG","message":"published 'order_placed' event into Kinesis"}
-    ✓ Should return 200
-    ✓ Should publish a message to Kinesis stream
-
   When we invoke the POST /restaurants/search endpoint with theme 'cartoon'
 invoking via handler function search-restaurants
     ✓ Should return an array of 4 restaurants (141ms)
 
 
-  7 passing (3s)
+  3 passing (1s)
 ```
 
 </p></details>

@@ -59,39 +59,11 @@ iamRoleStatements:
         - Arn
 ```
 
-5. Modify `serverless.yml` and give the `place-order` function its own IAM role statements
-
-```yml
-iamRoleStatements:
-  - Effect: Allow
-    Action: kinesis:PutRecord
-    Resource: 
-      Fn::GetAtt:
-        - orderEventsStream
-        - Arn
-```
-
-6. Modify `serverless.yml` and give the `notify-restaurant` function its own IAM role statements
-
-```yml
-iamRoleStatements:
-  - Effect: Allow
-    Action: kinesis:PutRecord
-    Resource: 
-      Fn::GetAtt:
-        - orderEventsStream
-        - Arn
-  - Effect: Allow
-    Action: sns:Publish
-    Resource:
-      - Ref: restaurantNotificationTopic
-```
-
-7. Deploy the project
+5. Deploy the project
 
 `npm run sls -- deploy -s dev -r us-east-1`
 
-8. Run the acceptance tests to make sure they're still working
+6. Run the acceptance tests to make sure they're still working
 
 `STAGE=dev REGION=us-east-1 npm run acceptance`
 
