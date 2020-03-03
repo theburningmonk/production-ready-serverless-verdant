@@ -1,4 +1,4 @@
-# Module 22: Capture and forward correlation ID via HTTP
+# Module 19: Capture and forward correlation ID via HTTP
 
 ## Capture and forward correlation IDs
 
