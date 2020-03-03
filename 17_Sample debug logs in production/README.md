@@ -1,4 +1,4 @@
-# Module 20: Sample debug logs in production
+# Module 17: Sample debug logs in production
 
 ## Sample 1% of debug logs in production
 
