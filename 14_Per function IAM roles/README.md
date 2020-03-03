@@ -1,4 +1,4 @@
-# Module 16: Per function IAM roles
+# Module 14: Per function IAM roles
 
 ## Give each function a dedicated IAM role
 
