@@ -1,4 +1,4 @@
-# Module 19: Structured logging
+# Module 16: Structured logging
 
 ## Apply structured logging to the project
 
